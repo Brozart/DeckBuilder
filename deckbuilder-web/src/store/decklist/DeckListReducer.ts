@@ -1,78 +1,85 @@
+import { DeckList, newDeckList, DeckListItem, Card } from 'api/model';
 import { DeckListActionTypes } from './DeckListTypes';
-import { Card } from '../../api/model/card';
-
-export interface CardItem {
-    id: string;
-    card: Card;
-    count: number;
-}
 
 export interface DeckListState {
-    cards: CardItem[];
-    name: string;
+    deckList: DeckList;
 }
 
 const initialState: DeckListState = {
-    cards: [],
-    name: ''
+    deckList: newDeckList()
 };
 
-function isCardContained(cards: CardItem[], cardToAdd: Card): boolean {
-    return cards.filter(item => item.id === cardToAdd.id).length === 1;
+function isDeckListItemContained(items: DeckListItem[], cardToAdd: Card): boolean {
+    return items.filter(item => item.id === cardToAdd.id).length === 1;
 }
 
 function addCards(state: DeckListState, cardToAdd: Card, count: number): DeckListState {
-    if (isCardContained(state.cards, cardToAdd)) {
+    if (isDeckListItemContained(state.deckList.items, cardToAdd)) {
         return {
             ...state,
-            cards: state.cards.map(item => {
-                if (item.id !== cardToAdd.id) {
-                    return item;
-                }
+            deckList: {
+                ...state.deckList,
+                items: state.deckList.items.map(item => {
+                    if (item.id !== cardToAdd.id) {
+                        return item;
+                    }
 
-                return {
-                    ...item,
-                    count: item.count + count
-                };
-            })
+                    return {
+                        ...item,
+                        count: item.count + count
+                    };
+                })
+            }
         };
     } else {
-        const cardItems = state.cards.slice();
-        cardItems.push({
+        const newItems = state.deckList.items.slice();
+        newItems.push({
             id: cardToAdd.id,
             card: cardToAdd,
             count
         });
         return {
             ...state,
-            cards: cardItems
+            deckList: {
+                ...state.deckList,
+                items: newItems
+            }
         };
     }
 }
 
-function isCountHigherThan(cards: CardItem[], card: Card, count: number): boolean {
-    return cards.filter(item => item.id).every(item => item.count > count);
+function isCountHigherThan(items: DeckListItem[], card: Card, count: number): boolean {
+    return items.filter(item => item.id).every(item => item.count > count);
 }
 
 function removeCards(state: DeckListState, cardToRemove: Card, count: number): DeckListState {
-    if (isCardContained(state.cards, cardToRemove) && isCountHigherThan(state.cards, cardToRemove, count)) {
+    if (
+        isDeckListItemContained(state.deckList.items, cardToRemove) &&
+        isCountHigherThan(state.deckList.items, cardToRemove, count)
+    ) {
         return {
             ...state,
-            cards: state.cards.map(item => {
-                if (item.id !== cardToRemove.id) {
-                    return item;
-                }
+            deckList: {
+                ...state.deckList,
+                items: state.deckList.items.map(item => {
+                    if (item.id !== cardToRemove.id) {
+                        return item;
+                    }
 
-                return {
-                    ...item,
-                    count: item.count - count
-                };
-            })
+                    return {
+                        ...item,
+                        count: item.count - count
+                    };
+                })
+            }
         };
     } else {
         return {
             ...state,
-            cards: state.cards.filter(item => item.id !== cardToRemove.id)
+            deckList: {
+                ...state.deckList,
+                items: state.deckList.items.filter(item => item.id !== cardToRemove.id)
+            }
         };
     }
 }
