@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/DeckBuilder.iml" filepath="$PROJECT_DIR$/.idea/DeckBuilder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/deckbuilder-web/deckbuilder-web.iml" filepath="$PROJECT_DIR$/deckbuilder-web/deckbuilder-web.iml" />
+    </modules>
+  </component>
+</project>
