@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/DeckBuilder.iml" filepath="$PROJECT_DIR$/.idea/DeckBuilder.iml" />
-      <module fileurl="file://$PROJECT_DIR$/deckbuilder-web/deckbuilder-web.iml" filepath="$PROJECT_DIR$/deckbuilder-web/deckbuilder-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/deckbuilder-bootstrap/deckbuilder-bootstrap.iml" filepath="$PROJECT_DIR$/deckbuilder-bootstrap/deckbuilder-bootstrap.iml" />
+      <module fileurl="file://$PROJECT_DIR$/deckbuilder-material-ui/deckbuilder-web.iml" filepath="$PROJECT_DIR$/deckbuilder-material-ui/deckbuilder-web.iml" />
     </modules>
   </component>
 </project>
